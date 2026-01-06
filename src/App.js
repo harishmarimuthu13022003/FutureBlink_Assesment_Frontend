@@ -13,6 +13,8 @@ import './App.css';
 import InputNode from './components/InputNode';
 import ResultNode from './components/ResultNode';
 
+const API_BASE_URL = 'https://futureblink-assesment-backend.onrender.com';
+
 const nodeTypes = {
   inputNode: InputNode,
   resultNode: ResultNode,
@@ -101,7 +103,7 @@ function App() {
     updateResultNode('Loading...');
 
     try {
-      const response = await axios.post('/api/ask-ai', { prompt });
+      const response = await axios.post(`${API_BASE_URL}/api/ask-ai`, { prompt });
       if (response.data.success) {
         updateResultNode(response.data.response);
         setSaveStatus('');
@@ -130,7 +132,7 @@ function App() {
     }
 
     try {
-      const apiResponse = await axios.post('/api/save-conversation', {
+      const apiResponse = await axios.post(`${API_BASE_URL}/api/save-conversation`, {
         prompt,
         response,
       });
